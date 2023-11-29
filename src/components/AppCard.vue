@@ -22,6 +22,8 @@ export default {
                 img = 'flag-jp.png'
             } else if (this.film.original_language == "es") {
                 img = 'flag-es.png'
+            } else if (this.film.original_language == "fr") {
+                img = 'flag-fr.png'
             } else {
                 this.languageNotFound = true
             }
@@ -43,6 +45,9 @@ export default {
             setTimeout(() => {
                 this.visible = false
             }, 100)
+        },
+        vote(vote) {
+            return Math.ceil(vote / 2)
         }
     }
 }
@@ -57,7 +62,9 @@ export default {
             <p>Titolo originale: <span>{{ film.original_name }}{{ film.original_title }}</span></p>
             <p>Lingua: <span v-if="languageNotFound">{{ film.original_language }}</span><img v-else :src="getImgFlagUrl()"
                     alt=""></p>
-            <p>Voto: <span>{{ film.vote_count }}</span></p>
+            <p>Voto: <span v-if="vote(film.vote_average) !== 0"><i class="fa-solid fa-star"
+                        v-for="star in vote(film.vote_average)"></i></span><span v-else>0</span></p>
+            <p>Trama: <span v-if="film.overview">{{ film.overview }}</span> <span v-else>Trama non disponibile</span></p>
         </div>
     </div>
 </template>
@@ -84,6 +91,7 @@ export default {
     }
 
     .data {
+        overflow: auto;
 
         h3 {
             text-align: center;
@@ -91,6 +99,7 @@ export default {
             color: rgb(224, 67, 67);
             border-bottom: 2px solid rgb(156, 73, 73);
         }
+
         width: 100%;
         aspect-ratio: .6;
         padding: 1rem;
@@ -105,6 +114,12 @@ export default {
             span {
                 font-weight: normal;
                 margin-left: .5rem;
+
+                i {
+                    color: gold;
+                    -webkit-text-stroke-width: 1px;
+                    -webkit-text-stroke-color: black;
+                }
             }
 
             img {
