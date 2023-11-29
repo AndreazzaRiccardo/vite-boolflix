@@ -26,7 +26,7 @@ export default {
 header {
     padding: 2rem;
     background-color: rgb(41, 41, 41);
-    @include flex (row, space-between, center);
+    @include flex (row, space-between, center, nowrap);
 
     h1 {
         font-size: 2rem;

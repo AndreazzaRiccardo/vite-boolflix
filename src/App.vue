@@ -3,6 +3,7 @@ import axios from 'axios';
 import { store } from './store.js';
 import AppCardList from './components/AppCardList.vue';
 import AppHeader from './components/AppHeader.vue';
+import AppLoader from './components/AppLoader.vue';
 export default {
   data() {
     return {
@@ -23,9 +24,9 @@ export default {
         })
         .then((resp) => {
           if (type == "tv") {
-            this.store.series = resp.data;
+            this.store.series = resp.data.results;
           } else if (type == "movie") {
-            this.store.films = resp.data;
+            this.store.films = resp.data.results;
           }
         })
         .catch((err) => {
@@ -39,15 +40,18 @@ export default {
       this.apiCall("tv");
       this.apiCall("movie");
       this.store.searchText = "";
+      console.log(this.store.films);
+      console.log(this.store.series);
     }
   },
-  components: { AppCardList, AppHeader }
+  components: { AppCardList, AppHeader, AppLoader }
 }
 </script>
 
 <template>
-  <AppHeader @search="searchMovieAndSeries"/>
-  <AppCardList />
+  <AppHeader @search="searchMovieAndSeries" />
+  <AppLoader v-if="store.loading"/>
+  <AppCardList v-else />
 </template>
 
 <style lang="scss">
