@@ -1,6 +1,11 @@
 <script>
+import { store } from '../store.js';
 export default {
-
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 
@@ -9,7 +14,8 @@ export default {
         <h1>BOOLFLIX</h1>
         <div class="search-bar">
             <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label>
-            <input @keyup.enter="$emit('search-film')" placeholder="Cerca un titolo" type="text" name="" id="search">
+            <input @keyup.enter="$emit('search')" placeholder="Cerca un titolo" type="text" name="" id="search"
+                v-model="store.searchText">
         </div>
     </header>
 </template>
