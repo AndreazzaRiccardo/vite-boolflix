@@ -17,9 +17,8 @@ export default {
             if (this.flagArray.includes(lang)) {
                 return new URL(`../assets/img/flag-${lang}.png`, import.meta.url).href;
             } else {
-                this.languageNotFound = true
+                this.languageNotFound = true;
             }
-            
         },
         getImg() {
             if (this.film.poster_path == undefined) {
@@ -30,22 +29,22 @@ export default {
         },
         showData() {
             setTimeout(() => {
-                this.visible = true
+                this.visible = true;
             }, 100)
         },
         hiddenData() {
             setTimeout(() => {
-                this.visible = false
+                this.visible = false;
             }, 100)
         },
         vote(vote) {
-            return Math.ceil(vote / 2)
+            return Math.ceil(vote / 2);
         },
         altImg() {
             if (this.film.title === undefined) {
-                return "Poster of " + this.film.name
+                return "Poster of " + this.film.name;
             } else {
-                return "Poster of " + this.film.title
+                return "Poster of " + this.film.title;
             }
         },
     },

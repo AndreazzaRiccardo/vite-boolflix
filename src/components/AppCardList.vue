@@ -4,12 +4,12 @@ import { store } from '../store.js';
 export default {
     data() {
         return {
-            store
+            store,
         }
     },
     components: {
         AppCard
-    }
+    },
 }
 </script>
 
@@ -17,7 +17,7 @@ export default {
     <div class="container">
         <h2 v-if="store.films.length !== 0">FILMS</h2>
         <div class="card-list">
-            <AppCard v-for="(movie, i) in store.films" :key="i" :film="movie" :filterValue="store.filterValue"/>
+            <AppCard v-for="(movie, i) in store.films" :key="i" :film="movie" :filterValue="store.filterValue" />
         </div>
         <h2 v-if="store.series.length !== 0">SERIES</h2>
         <div class="card-list">
@@ -38,7 +38,7 @@ export default {
     }
 
     h2 {
-        text-align: center;
+        text-align: start;
         color: white;
         font-size: 3rem;
         margin: 2rem;
