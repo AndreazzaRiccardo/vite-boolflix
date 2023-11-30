@@ -11,6 +11,9 @@ export default {
       error: false
     };
   },
+  created() {
+    this.getAllGenres();
+  },
   methods: {
     apiCall(type) {
       this.store.loading = true;
@@ -37,12 +40,35 @@ export default {
         });
     },
     searchMovieAndSeries() {
-      this.apiCall("tv");
-      this.apiCall("movie");
-      this.store.searchText = "";
-      console.log(this.store.films);
-      console.log(this.store.series);
-    }
+      if (this.store.searchText != "") {
+        this.apiCall("tv");
+        this.apiCall("movie");
+        this.store.searchText = "";
+      }
+    },
+    getAllGenres() {
+      axios
+        .get(this.store.baseUrl + "genre/tv/list", {
+          params: {
+            api_key: this.store.apiKey
+          }
+        })
+        .then((resp) => {
+          this.store.seriesGenres = resp.data.genres
+        }).finally(() => {
+          axios
+            .get(this.store.baseUrl + "genre/movie/list", {
+              params: {
+                api_key: this.store.apiKey
+              }
+            })
+            .then((resp) => {
+              this.store.filmsGenres = resp.data.genres
+            }).finally(() => {
+              this.store.allGenres = [...this.store.seriesGenres, ...this.store.filmsGenres]
+            })
+        })
+    },
   },
   components: { AppCardList, AppHeader, AppLoader }
 }
@@ -50,7 +76,7 @@ export default {
 
 <template>
   <AppHeader @search="searchMovieAndSeries" />
-  <AppLoader v-if="store.loading"/>
+  <AppLoader v-if="store.loading" />
   <AppCardList v-else />
 </template>
 
