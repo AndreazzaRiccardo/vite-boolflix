@@ -71,8 +71,7 @@ export default {
 </script>
 
 <template>
-    <div class="card" @mouseover="showData" @mouseleave="hiddenData"
-        v-if="film.genre_ids.includes(filterValue) || filterValue == 0">
+    <div class="card" @mouseover="showData" @mouseleave="hiddenData">
 
         <img v-show="!visible" v-if="!imgNotFound" class="poster" :src="getImg()" :alt="altImg()">
 
@@ -102,7 +101,7 @@ export default {
                 <span v-else>Trama non disponibile</span>
             </p>
             <a @click="showActors" href="">Cast</a>
-            <p v-if="!searchError" v-for="actor in actorsArray.slice(0,5)">{{ actor.name }}</p>
+            <p v-if="!searchError" v-for="actor in actorsArray.slice(0, 5)">{{ actor.name }}</p>
             <p v-else>LA RICERCA NON HA PRODOTTO RISULTATI</p>
 
         </div>

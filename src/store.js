@@ -4,13 +4,15 @@ export const store = reactive({
     films: [],
     series: [],
     baseUrl: 'https://api.themoviedb.org/3/',
-    // apiKey: import.meta.env.VITE_FUT_API_KEY,
-    apiKey: "8c83d4a4bdc4a69e91e0092b1d0762ea",
+    apiKey: import.meta.env.VITE_FUT_API_KEY,
     loading: false,
     searchText: "",
     filmsGenres: [],
     seriesGenres: [],
     allGenres: [],
     filterValue: 0,
+    filterFilms: [],
+    filterSeries: [],
+    searchErrorMessage: "INIZIA UNA RICERCA"
 });
 

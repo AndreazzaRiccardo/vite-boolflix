@@ -6,6 +6,30 @@ export default {
             store,
         }
     },
+    methods: {
+        filterForGenres() {
+            if (store.filterValue !== 0) {
+                this.store.filterFilms = []
+                this.store.films.forEach(element => {
+                    if (element.genre_ids.includes(this.store.filterValue)) {
+                        this.store.filterFilms.push(element)
+                    }
+                });
+                this.store.filterSeries = []
+                this.store.series.forEach(element => {
+                    if (element.genre_ids.includes(this.store.filterValue)) {
+                        this.store.filterSeries.push(element)
+                    }
+                });
+                if (this.store.filterFilms.length == 0 && this.store.filterSeries.length == 0) {
+                    this.store.searchErrorMessage = "LA RICERCA NON HA PRODOTTO RISULTATI"
+                }
+            } else {
+                this.store.filterSeries = store.series;
+                this.store.filterFilms = store.films;
+            }
+        },
+    }
 }
 </script>
 
@@ -13,7 +37,7 @@ export default {
     <header>
         <h1>BOOLFLIX</h1>
         <div class="search-section">
-            <select v-model="store.filterValue" name="genres" id="genres">
+            <select v-model="store.filterValue" @change="filterForGenres" name="genres" id="genres">
                 <option :value="0" selected>Scegli un genere</option>
                 <option v-for="genre in store.allGenres" :value="genre.id">{{ genre.name }}</option>
             </select>

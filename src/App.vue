@@ -37,6 +37,8 @@ export default {
         })
         .finally(() => {
           this.store.loading = false;
+          this.store.filterFilms = this.store.films
+          this.store.filterSeries = this.store.series
         });
     },
     searchMovieAndSeries() {
