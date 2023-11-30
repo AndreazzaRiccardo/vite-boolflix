@@ -1,15 +1,19 @@
 <script>
+import axios from 'axios';
 export default {
     props: {
         film: Object,
         filterValue: Number,
+        api_key: String
     },
     data() {
         return {
             languageNotFound: false,
             imgNotFound: false,
             visible: false,
-            flagArray: ["it", "fr", "en", "ja", "es",]
+            flagArray: ["it", "fr", "en", "ja", "es",],
+            actorsArray: [],
+            searchError: false
         }
     },
     methods: {
@@ -47,6 +51,21 @@ export default {
                 return "Poster of " + this.film.title;
             }
         },
+        showActors() {
+            event.preventDefault();
+            axios
+                .get(`https://api.themoviedb.org/3/movie/${this.film.id}/credits`, {
+                    params: {
+                        api_key: this.api_key
+                    }
+                })
+                .then((resp) => {
+                    this.actorsArray = resp.data.cast;
+                })
+                .catch((err) => {
+                    this.searchError = true;
+                })
+        }
     },
 }
 </script>
@@ -82,6 +101,9 @@ export default {
                 <span v-if="film.overview">{{ film.overview }}</span>
                 <span v-else>Trama non disponibile</span>
             </p>
+            <a @click="showActors" href="">Cast</a>
+            <p v-if="!searchError" v-for="actor in actorsArray.slice(0,5)">{{ actor.name }}</p>
+            <p v-else>LA RICERCA NON HA PRODOTTO RISULTATI</p>
 
         </div>
 
@@ -112,6 +134,12 @@ export default {
         width: 100%;
         aspect-ratio: .6;
         padding: 1rem;
+
+        a {
+            color: orange;
+            margin-bottom: 1rem;
+            display: block;
+        }
 
         h3 {
             text-align: center;
