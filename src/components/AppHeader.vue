@@ -13,8 +13,8 @@ export default {
     <header>
         <h1>BOOLFLIX</h1>
         <div class="search-section">
-            <select v-model="store.filterValue" @change="$emit('filter')" name="genres" id="genres">
-                <option value="" selected>Scegli un genere</option>
+            <select v-model="store.filterValue" name="genres" id="genres">
+                <option :value="0" selected>Scegli un genere</option>
                 <option v-for="genre in store.allGenres" :value="genre.id">{{ genre.name }}</option>
             </select>
             <button @click="$emit('search')">CERCA</button>

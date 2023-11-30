@@ -22,7 +22,7 @@ export default {
         api_key: this.store.apiKey
       };
       axios
-        .get(this.store.baseUrl + "search" + "/" + type, {
+        .get(this.store.baseUrl + "search/" + type, {
           params,
         })
         .then((resp) => {

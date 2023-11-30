@@ -1,35 +1,25 @@
 <script>
-import { store } from '../store.js';
 export default {
     props: {
         film: Object,
+        filterValue: Number,
     },
     data() {
         return {
             languageNotFound: false,
             imgNotFound: false,
             visible: false,
-            store,
+            flagArray: ["it", "fr", "en", "ja", "es",]
         }
     },
     methods: {
-        getImgFlagUrl(img) {
-            if (this.film.original_language == "it") {
-                img = 'flag-italy.png'
-            } else if (this.film.original_language == "us") {
-                img = 'flag-us.png'
-            } else if (this.film.original_language == "en") {
-                img = 'flag-gb.png'
-            } else if (this.film.original_language == "ja") {
-                img = 'flag-jp.png'
-            } else if (this.film.original_language == "es") {
-                img = 'flag-es.png'
-            } else if (this.film.original_language == "fr") {
-                img = 'flag-fr.png'
+        getImgFlagUrl(lang) {
+            if (this.flagArray.includes(lang)) {
+                return new URL(`../assets/img/flag-${lang}.png`, import.meta.url).href;
             } else {
                 this.languageNotFound = true
             }
-            return new URL(`../assets/img/${img}`, import.meta.url).href;
+            
         },
         getImg() {
             if (this.film.poster_path == undefined) {
@@ -52,19 +42,19 @@ export default {
             return Math.ceil(vote / 2)
         },
         altImg() {
-            if (this.film.title == undefined) {
+            if (this.film.title === undefined) {
                 return "Poster of " + this.film.name
             } else {
                 return "Poster of " + this.film.title
             }
         },
-    }
+    },
 }
 </script>
 
 <template>
     <div class="card" @mouseover="showData" @mouseleave="hiddenData"
-        v-if="film.genre_ids.includes(store.filterValue) || store.filterValue == ''">
+        v-if="film.genre_ids.includes(filterValue) || filterValue == 0">
 
         <img v-show="!visible" v-if="!imgNotFound" class="poster" :src="getImg()" :alt="altImg()">
 
@@ -79,7 +69,7 @@ export default {
             </p>
             <p>Lingua:
                 <span v-if="languageNotFound">{{ film.original_language }}</span>
-                <img v-else :src="getImgFlagUrl()" :alt="`${film.original_language} flag`">
+                <img v-else :src="getImgFlagUrl(film.original_language)" :alt="`${film.original_language} flag`">
             </p>
             <p>Voto:
                 <span>

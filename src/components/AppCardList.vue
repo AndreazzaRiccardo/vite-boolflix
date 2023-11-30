@@ -17,11 +17,11 @@ export default {
     <div class="container">
         <h2 v-if="store.films.length !== 0">FILMS</h2>
         <div class="card-list">
-            <AppCard v-for="(movie, i) in store.films" :key="i" :film="movie" />
+            <AppCard v-for="(movie, i) in store.films" :key="i" :film="movie" :filterValue="store.filterValue"/>
         </div>
         <h2 v-if="store.series.length !== 0">SERIES</h2>
         <div class="card-list">
-            <AppCard v-for="(serie, i) in store.series" :key="i" :film="serie" />
+            <AppCard v-for="(serie, i) in store.series" :key="i" :film="serie" :filterValue="store.filterValue" />
         </div>
     </div>
 </template>
