@@ -130,7 +130,7 @@ export default {
     background: linear-gradient(180deg, rgba(27, 27, 27, 1) 35%, rgba(84, 84, 84, 1) 68%);
 
     @include responsive("xlg") {
-        width: calc((100% - 2rem) / 5);
+        width: calc((100% - 2.5rem) / 6);
     }
 
     @include responsive("lg") {
