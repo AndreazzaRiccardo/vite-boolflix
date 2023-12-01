@@ -5,7 +5,7 @@ export default {
         return {
             store,
             visibleMenuUser: false,
-            menuArray: ["HOME", "PROFILO", "CERCA", "IMPOSTAZIONI"]
+            menuArray: ["HOME", "PROFILO", "CERCA", "IMPOSTAZIONI", "LOGOUT"]
         }
     },
     props: {
@@ -45,6 +45,12 @@ export default {
         },
         showMenu() {
             this.visibleMenuUser = !this.visibleMenuUser
+        },
+        clickMenuOption(option) {
+            if(option === "LOGOUT") {
+                localStorage.removeItem("Username");
+                store.login = true;
+            }
         }
     }
 }
@@ -71,7 +77,7 @@ export default {
                 <img :src="getImg()" alt="">
                 <div v-if="visibleMenuUser">
                     <ul>
-                        <li v-for="item in menuArray">
+                        <li @click="clickMenuOption(item)" v-for="item in menuArray">
                             <a href="">{{ item }}</a>
                         </li>
                     </ul>
