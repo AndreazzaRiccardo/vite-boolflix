@@ -10,7 +10,8 @@ export default {
     return {
       store,
       error: false,
-      page: 1
+      page: 1,
+      showNextBtn: true
     };
   },
   created() {
@@ -137,6 +138,7 @@ export default {
       }
     },
     showMore() {
+      this.store.filterValue = 0;
       this.page++;
       if (this.store.searchText == "") {
         this.mostViewed();
@@ -147,11 +149,14 @@ export default {
       setTimeout(() => {
         if (this.store.filterFilms.length == 0 && this.store.filterSeries.length == 0) {
           this.store.searchMessage = "Non ci sono altre pagine disponibili";
+          this.showNextBtn = false;
         }
-      }, 2000);
+      }, 1000);
     },
     showBack() {
       if (this.page > 1) {
+        this.showNextBtn = true;
+        this.store.filterValue = 0;
         this.page--;
         if (this.store.searchText == "") {
           this.store.searchMessage = "I PIU'VISTI:";
@@ -178,7 +183,7 @@ export default {
     <AppLogin v-if="store.login" />
     <div v-else>
       <AppLoader v-if="store.loading" />
-      <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" />
+      <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" :showNextBtn="showNextBtn" />
     </div>
   </div>
 </template>

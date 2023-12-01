@@ -11,7 +11,8 @@ export default {
         AppCard
     },
     props: {
-        page: Number
+        page: Number,
+        showNextBtn: Boolean
     }
 }
 </script>
@@ -23,7 +24,7 @@ export default {
                 <h2 class="search-message">{{ store.searchMessage }}</h2>
                 <div>
                     <button v-if="page > 1" @click="$emit('show-back')">BACK</button>
-                    <button @click="$emit('show-more')">NEXT</button>
+                    <button v-if="showNextBtn" @click="$emit('show-more')">NEXT</button>
                 </div>
             </div>
 
