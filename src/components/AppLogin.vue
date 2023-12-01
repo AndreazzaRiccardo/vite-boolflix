@@ -26,7 +26,7 @@ export default {
 
 <template>
     <div class="container">
-        <h2>DEVI EFFETTUARE IL LOGIN PER IL TUO PRIMO ACCESSO</h2>
+        <h2>EFFETTUA IL LOGIN</h2>
         <label for="login">INSERISCI IL TUO NOME</label>
         <input type="text" id="login" @keyup.enter="login" v-model.trim="store.username">
         <button @click="login">LOGIN</button>
