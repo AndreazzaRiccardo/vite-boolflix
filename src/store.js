@@ -17,6 +17,7 @@ export const store = reactive({
     username: "",
     login: true,
     loadingMessage: "",
-    visibleMenuUser: false
+    visibleMenuUser: false,
+    hiddenSearch: true
 });
 

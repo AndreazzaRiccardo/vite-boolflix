@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <main>
+    <main :class="{ 'hidden': store.hiddenSearch === true }">
         <div class="container">
             <div class="top-list">
                 <h2 class="search-message">{{ store.searchMessage }}</h2>
@@ -63,7 +63,12 @@ main {
     }
 
     @include responsive("sm") {
-        height: calc(100dvh - 400px);
+
+        height: calc(100dvh - 500px);
+
+        &.hidden {
+            height: calc(100dvh - 120px);
+        }
     }
 }
 
@@ -83,6 +88,7 @@ main {
         color: $primary-color;
         border: 1px solid $primary-color;
         margin: 2rem;
+        border-radius: 5px;
 
         &:hover {
             filter: brightness(150%);

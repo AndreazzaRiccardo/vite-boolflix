@@ -4,7 +4,7 @@ export default {
     data() {
         return {
             store,
-            menuArray: ["HOME", "PROFILO", "CERCA", "IMPOSTAZIONI", "LOGOUT"]
+            menuArray: ["HOME", "PROFILO", "CERCA", "IMPOSTAZIONI", "LOGOUT"],
         }
     },
     props: {
@@ -56,15 +56,19 @@ export default {
                     this.store.login = true;
                 }, 3000);
             }
+        },
+        openSearchbar() {
+            this.store.hiddenSearch = !this.store.hiddenSearch
         }
     }
 }
 </script>
 
 <template>
-    <header>
+    <header :class="{ 'hidden': store.hiddenSearch === true }">
         <img class="logo" :src="getImg('logo.png')" alt="">
-        <div class="search-section" v-if="!store.login">
+        <button class="open-searchbar" @click="openSearchbar"><i class="fa-solid fa-bars"></i></button>
+        <div class="search-section" :class="{ 'hidden': store.hiddenSearch === true }" v-if="!store.login">
             <select v-model="store.filterValue" @change="filterForGenres" name="genres" id="genres">
                 <option :value="0" selected>Scegli un genere</option>
                 <option v-for="genre in store.allGenres" :value="genre.id">{{ genre.name }}</option>
@@ -107,10 +111,35 @@ header {
     }
 
     @include responsive("sm") {
+
         @include flex (column, space-between, center, nowrap);
-        height: 400px;
         text-align: center;
+        height: 500px;
+
+        &.hidden {
+            height: 170px;
+        }
     }
+
+    .open-searchbar {
+        display: none;
+        padding: .5rem;
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        background-color: #707070;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 70%;
+        }
+
+        @include responsive("sm") {
+            display: block;
+        }
+    }
+
+
 
     .search-bar {
         padding: .5rem;
@@ -150,6 +179,12 @@ header {
         @include responsive("lg") {
             flex-direction: column;
             gap: 1rem;
+        }
+
+        @include responsive("sm") {
+            &.hidden {
+                display: none;
+            }
         }
 
         .src-btn {
