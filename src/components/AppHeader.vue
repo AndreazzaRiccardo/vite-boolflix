@@ -146,6 +146,7 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 5;
 
             img {
                 width: 100%;
@@ -168,6 +169,8 @@ header {
                     }
 
                     a {
+                        font-size: 2rem;
+                        line-height: 3rem;
                         color: white;
                         text-decoration: none;
                     }
