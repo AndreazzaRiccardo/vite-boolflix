@@ -7,7 +7,6 @@
 }
 
 body {
-    background: rgb(27, 27, 27);
     background: linear-gradient(180deg, rgba(27, 27, 27, 1) 35%, rgba(84, 84, 84, 1) 68%);
 
     @include responsive("lg") {

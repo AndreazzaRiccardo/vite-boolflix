@@ -57,6 +57,14 @@ main {
     &::-webkit-scrollbar {
         width: 1px;
     }
+
+    @include responsive("lg") {
+        height: calc(100dvh - 300px);
+    }
+
+    @include responsive("sm") {
+        height: calc(100dvh - 400px);
+    }
 }
 
 .container {

@@ -117,11 +117,17 @@ header {
         background-color: white;
         border-radius: 5px;
 
+        @include responsive("sm") {}
+
         input {
             border: none;
             outline: none;
             font-weight: bold;
             padding: 0 1rem;
+
+            @include responsive("sm") {
+                text-align: center;
+            }
         }
     }
 
