@@ -21,6 +21,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../style/partials/mixins" as *;
+
 .loader {
     display: flex;
     flex-direction: column;
@@ -32,6 +34,10 @@ export default {
 h2 {
     color: white;
     font-size: 4rem;
+
+    @include responsive("sm") {
+        font-size: 1.5rem;
+    }
 }
 
 .ex-10-icon {

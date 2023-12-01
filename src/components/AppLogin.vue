@@ -41,6 +41,7 @@ export default {
     padding: 3rem;
     @include flex (column, center, center, nowrap);
     gap: 2rem;
+    text-align: center;
 
     button {
         padding: .5rem 1rem;

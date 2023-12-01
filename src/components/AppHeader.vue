@@ -47,6 +47,7 @@ export default {
         },
         clickMenuOption(option) {
             event.preventDefault()
+            store.hiddenSearch = true;
             if (option === "LOGOUT") {
                 this.store.loadingMessage = "LOGOUT IN CORSO";
                 this.store.loading = true;
@@ -138,8 +139,6 @@ header {
             display: block;
         }
     }
-
-
 
     .search-bar {
         padding: .5rem;
@@ -254,7 +253,13 @@ header {
                         text-decoration: none;
 
                         @include responsive("sm") {
+                            font-size: 1rem;
+                            line-height: 0;
+                        }
+
+                        @include responsive("md") {
                             font-size: 1.5rem;
+                            line-height: 2rem;
                         }
                     }
                 }
