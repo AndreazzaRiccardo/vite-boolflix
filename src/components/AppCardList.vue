@@ -1,6 +1,7 @@
 <script>
 import AppCard from './AppCard.vue';
 import { store } from '../store.js';
+import AppPoster from './AppPoster.vue';
 export default {
     data() {
         return {
@@ -8,7 +9,8 @@ export default {
         }
     },
     components: {
-        AppCard
+        AppCard,
+        AppPoster
     },
     props: {
         page: Number,
@@ -19,6 +21,7 @@ export default {
 
 <template>
     <main :class="{ 'hidden': store.hiddenSearch === true }">
+        <AppPoster class="hidden" />
         <div class="container">
             <div class="top-list">
                 <h2 class="search-message">{{ store.searchMessage }}</h2>
@@ -32,13 +35,13 @@ export default {
                 <h2 v-if="store.filterFilms.length > 0">FILMS</h2>
                 <div class="card-list">
                     <AppCard v-for="(movie, i) in store.filterFilms" :key="i" :film="movie" :filterValue="store.filterValue"
-                        :api_key="store.apiKey" />
+                        :api_key="store.apiKey" :imgSelect="store.imgSelect" />
                 </div>
                 <hr v-show="store.filterSeries.length > 0">
                 <h2 v-if="store.filterSeries.length > 0">SERIES</h2>
                 <div class="card-list">
                     <AppCard v-for="(serie, i) in store.filterSeries" :key="i" :film="serie"
-                        :filterValue="store.filterValue" :api_key="store.apiKey" />
+                        :filterValue="store.filterValue" :api_key="store.apiKey" :imgSelect="store.imgSelect" />
                 </div>
             </div>
 
@@ -51,6 +54,13 @@ export default {
 @use '../style/partials/variables' as *;
 
 main {
+
+    @include responsive("lg") {
+        .hidden {
+            display: none;
+        }
+    }
+
     height: calc(100dvh - 100px);
     overflow: auto;
 

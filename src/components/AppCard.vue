@@ -1,10 +1,11 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 export default {
     props: {
         film: Object,
         filterValue: Number,
-        api_key: String
+        api_key: String,
     },
     data() {
         return {
@@ -13,8 +14,12 @@ export default {
             visible: false,
             flagArray: ["it", "fr", "en", "ja", "es",],
             actorsArray: [],
-            searchError: false
+            searchError: false,
+            store
         }
+    },
+    created() {
+        this.selectThis();
     },
     methods: {
         getImgFlagUrl(lang) {
@@ -73,13 +78,26 @@ export default {
             } else {
                 window.open(`https://www.google.com/search?q=streming+${this.film.title}`);
             }
+        },
+        selectThis() {
+            if (this.film.backdrop_path != undefined) {
+                this.store.imgSelect = `https://image.tmdb.org/t/p/original${this.film.backdrop_path}`;
+                if (this.film.title == undefined) {
+                    this.store.filmCard.title = this.film.name;
+                } else {
+                    this.store.filmCard.title = this.film.title;
+                }
+                this.store.filmCard.language = this.film.original_language;
+                this.store.filmCard.vote = this.film.vote_average;
+                this.store.filmCard.overview = this.film.overview;
+            }
         }
     },
 }
 </script>
 
 <template>
-    <div class="card" @mouseover="showData" @mouseleave="hiddenData">
+    <div @click="selectThis" class="card" @mouseover="showData" @mouseleave="hiddenData">
 
         <img v-show="!visible" v-if="!imgNotFound" class="poster" :src="getImg()" :alt="altImg()">
 
@@ -113,7 +131,7 @@ export default {
 
             </div>
             <button @click="stremThis">
-                <a class="streming" href="">GUARDA</a>
+                <a class="streaming" href="">GUARDA</a>
             </button>
         </div>
 
@@ -169,7 +187,7 @@ export default {
             align-self: flex-end;
             border-radius: 5px;
 
-            .streming {
+            .streaming {
                 text-decoration: none;
                 color: $primary-color;
             }

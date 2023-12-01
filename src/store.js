@@ -18,6 +18,13 @@ export const store = reactive({
     login: true,
     loadingMessage: "",
     visibleMenuUser: false,
-    hiddenSearch: true
+    hiddenSearch: true,
+    imgSelect: "",
+    filmCard: {
+        title: "",
+        language:"",
+        vote: "",
+        overview: ""
+    }
 });
 
