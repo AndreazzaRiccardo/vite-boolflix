@@ -90,10 +90,7 @@ export default {
             </p>
             <p>Voto:
                 <span>
-                    <i class="fa-solid fa-star" v-for="star in vote(film.vote_average)"></i>
-                </span>
-                <span>
-                    <i v-for="star in 5 - vote(film.vote_average)" class="fa-regular fa-star"></i>
+                    <i class="fa-star" v-for="star in 5" :class="star <= vote(film.vote_average) ? 'fa-solid' : 'fa-regular'" :key="star"></i>
                 </span>
             </p>
             <p>Trama:
@@ -157,7 +154,7 @@ export default {
 
         h3 {
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             color: $primary-color;
             border-bottom: 2px solid $primary-color;
         }

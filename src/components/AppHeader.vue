@@ -90,6 +90,7 @@ header {
     background-color: rgb(41, 41, 41);
     @include flex (row, space-between, center, nowrap);
     height: 100px;
+    border-bottom: 1px solid $primary-color;
 
     .search-bar {
         padding: .5rem;
@@ -110,7 +111,7 @@ header {
 
     .log {
         font-size: 1.5rem;
-        margin-left: 1rem;
+        margin-left: 1.5rem;
         color: $primary-color;
     }
 
