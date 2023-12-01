@@ -90,6 +90,10 @@ main {
         margin: 2rem;
         border-radius: 5px;
 
+        @include responsive("sm") {
+            margin: .5rem;
+        }
+
         &:hover {
             filter: brightness(150%);
             cursor: pointer;

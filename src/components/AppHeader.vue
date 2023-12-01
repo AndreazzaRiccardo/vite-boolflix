@@ -68,7 +68,7 @@ export default {
 <template>
     <header :class="{ 'hidden': store.hiddenSearch === true }">
         <img class="logo" :src="getImg('logo.png')" alt="">
-        <button class="open-searchbar" @click="openSearchbar"><i class="fa-solid fa-bars"></i></button>
+        <button v-if="store.login === false" class="open-searchbar" @click="openSearchbar"><i class="fa-solid fa-bars"></i></button>
         <div class="search-section" :class="{ 'hidden': store.hiddenSearch === true }" v-if="!store.login">
             <select v-model="store.filterValue" @change="filterForGenres" name="genres" id="genres">
                 <option :value="0" selected>Scegli un genere</option>
