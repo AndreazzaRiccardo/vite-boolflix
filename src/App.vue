@@ -151,7 +151,7 @@ export default {
           this.store.searchMessage = "Non ci sono altre pagine disponibili";
           this.showNextBtn = false;
         }
-      }, 100);
+      }, 500);
     },
     showBack() {
       if (this.page > 1) {

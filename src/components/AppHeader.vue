@@ -68,7 +68,8 @@ export default {
 <template>
     <header :class="{ 'hidden': store.hiddenSearch === true }">
         <img class="logo" :src="getImg('logo.png')" alt="">
-        <button v-if="store.login === false" class="open-searchbar" @click="openSearchbar"><i class="fa-solid fa-bars"></i></button>
+        <button v-if="store.login === false" class="open-searchbar" @click="openSearchbar"><i
+                class="fa-solid fa-bars"></i></button>
         <div class="search-section" :class="{ 'hidden': store.hiddenSearch === true }" v-if="!store.login">
             <select v-model="store.filterValue" @change="filterForGenres" name="genres" id="genres">
                 <option :value="0" selected>Scegli un genere</option>
@@ -234,7 +235,7 @@ header {
                 top: 155%;
 
                 @include responsive("sm") {
-                    right: -158%;
+                    right: -172%;
                 }
 
                 li {
@@ -253,13 +254,12 @@ header {
                         text-decoration: none;
 
                         @include responsive("sm") {
-                            font-size: 1rem;
+                            font-size: .5rem;
                             line-height: 0;
                         }
 
-                        @include responsive("md") {
+                        @include responsive("lg") {
                             font-size: 1.5rem;
-                            line-height: 2rem;
                         }
                     }
                 }
