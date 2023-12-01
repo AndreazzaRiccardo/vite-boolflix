@@ -14,4 +14,6 @@ Ogni elemento visualizzato sarà composto dalla propria locandina, che al passag
 <br>
 Potrò richiedere anche di visualizzare il cast cliccando sull'apposito bottone.
 <br>
+Con il bottone GUARDA mi verrà aperta una nuova finestra con una ricerca Google su i siti streaming per il titolo selezionato.
+<br>
 Tramite il menù a tendina nell'icona utente, potrò anche effettuare il logout.
