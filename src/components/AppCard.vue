@@ -65,6 +65,14 @@ export default {
                 .catch((err) => {
                     this.searchError = true;
                 })
+        },
+        stremThis() {
+            event.preventDefault();
+            if (this.film.title === undefined) {
+                location.assign(`https://www.google.com/search?q=streming+${this.film.name}`);
+            } else {
+                location.assign(`https://www.google.com/search?q=streming+${this.film.title}`);
+            }
         }
     },
 }
@@ -76,31 +84,37 @@ export default {
         <img v-show="!visible" v-if="!imgNotFound" class="poster" :src="getImg()" :alt="altImg()">
 
         <div class="data" v-show="visible || imgNotFound">
+            <div class="data-container">
 
-            <h3 v-if="imgNotFound">IMMAGINE NON DISPONIBILE</h3>
-            <p>Titolo:
-                <span>{{ film.name }}{{ film.title }}</span>
-            </p>
-            <p>Titolo originale:
-                <span>{{ film.original_name }}{{ film.original_title }}</span>
-            </p>
-            <p>Lingua:
-                <span v-if="languageNotFound">{{ film.original_language }}</span>
-                <img v-else :src="getImgFlagUrl(film.original_language)" :alt="`${film.original_language} flag`">
-            </p>
-            <p>Voto:
-                <span>
-                    <i class="fa-star" v-for="star in 5" :class="star <= vote(film.vote_average) ? 'fa-solid' : 'fa-regular'" :key="star"></i>
-                </span>
-            </p>
-            <p>Trama:
-                <span v-if="film.overview">{{ film.overview }}</span>
-                <span v-else>Trama non disponibile</span>
-            </p>
-            <a @click="showActors" href="">Cast</a>
-            <p v-if="!searchError" v-for="actor in actorsArray.slice(0, 5)">{{ actor.name }}</p>
-            <p v-else>LA RICERCA NON HA PRODOTTO RISULTATI</p>
+                <h3 v-if="imgNotFound">IMMAGINE NON DISPONIBILE</h3>
+                <p>Titolo:
+                    <span>{{ film.name }}{{ film.title }}</span>
+                </p>
+                <p>Titolo originale:
+                    <span>{{ film.original_name }}{{ film.original_title }}</span>
+                </p>
+                <p>Lingua:
+                    <span v-if="languageNotFound">{{ film.original_language }}</span>
+                    <img v-else :src="getImgFlagUrl(film.original_language)" :alt="`${film.original_language} flag`">
+                </p>
+                <p>Voto:
+                    <span>
+                        <i class="fa-star" v-for="star in 5"
+                            :class="star <= vote(film.vote_average) ? 'fa-solid' : 'fa-regular'" :key="star"></i>
+                    </span>
+                </p>
+                <p>Trama:
+                    <span v-if="film.overview">{{ film.overview }}</span>
+                    <span v-else>Trama non disponibile</span>
+                </p>
+                <a class="cast" @click="showActors" href="">Cast</a>
+                <p v-if="!searchError" v-for="actor in actorsArray.slice(0, 5)">{{ actor.name }}</p>
+                <p v-else>LA RICERCA NON HA PRODOTTO RISULTATI</p>
 
+            </div>
+            <button @click="stremThis">
+                <a class="streming" href="">GUARDA</a>
+            </button>
         </div>
 
     </div>
@@ -128,6 +142,29 @@ export default {
     }
 
     .data {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        button {
+            padding: .5rem 1rem;
+            background-color: rgb(86, 86, 86);
+            border: 1px solid $primary-color;
+            margin: 2rem;
+            align-self: flex-end;
+
+            .streming {
+                text-decoration: none;
+                color: $primary-color;
+            }
+
+            &:hover {
+                filter: brightness(150%);
+                cursor: pointer;
+            }
+        }
+
         &::-webkit-scrollbar {
             width: 5px;
         }
@@ -146,7 +183,7 @@ export default {
         aspect-ratio: .6;
         padding: 1rem;
 
-        a {
+        .cast {
             color: orange;
             margin-bottom: 1rem;
             display: block;

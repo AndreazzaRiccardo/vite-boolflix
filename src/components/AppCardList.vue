@@ -86,7 +86,7 @@ main {
         margin: 2rem;
 
         &:hover {
-            opacity: 50%;
+            filter:brightness(150%);
             cursor: pointer;
         }
     }
