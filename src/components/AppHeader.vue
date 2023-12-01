@@ -235,6 +235,7 @@ header {
                 top: 155%;
 
                 @include responsive("sm") {
+                    top: 100%;
                     right: -172%;
                 }
 
