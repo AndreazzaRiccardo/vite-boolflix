@@ -168,6 +168,16 @@ header {
     .log {
         font-size: 1.5rem;
         color: $primary-color;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        @include responsive("lg") {
+            p {
+                display: none;
+            }
+        }
+
     }
 
     .search-section {
@@ -179,6 +189,7 @@ header {
         @include responsive("lg") {
             flex-direction: column;
             gap: 1rem;
+            align-items: center;
         }
 
         @include responsive("sm") {
