@@ -98,7 +98,7 @@ export default {
 
 header {
     padding: 2rem 4rem;
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(27, 27, 27);
     @include flex (row, space-between, center, nowrap);
     height: 100px;
 

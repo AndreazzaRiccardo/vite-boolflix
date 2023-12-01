@@ -7,14 +7,14 @@
 }
 
 body {
-    background: rgb(41, 41, 41);
-    background: linear-gradient(180deg, rgba(41, 41, 41, 1) 35%, rgba(84, 84, 84, 1) 68%);
+    background: rgb(27, 27, 27);
+    background: linear-gradient(180deg, rgba(27, 27, 27, 1) 35%, rgba(84, 84, 84, 1) 68%);
 
     @include responsive("lg") {
-        background: linear-gradient(180deg, rgba(41, 41, 41, 1) 40%, rgba(84, 84, 84, 1) 68%);
+        background: linear-gradient(180deg, rgba(27, 27, 27, 1) 40%, rgba(84, 84, 84, 1) 68%);
     }
 
     @include responsive("sm") {
-        background: linear-gradient(180deg, rgba(41, 41, 41, 1) 50%, rgba(84, 84, 84, 1) 68%);
+        background: linear-gradient(180deg, rgba(27, 27, 27, 1) 50%, rgba(84, 84, 84, 1) 68%);
     }
 }

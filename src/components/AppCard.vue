@@ -127,8 +127,7 @@ export default {
 .card {
     color: white;
     width: calc((100% - 1.5rem) / 4);
-    background: rgb(41,41,41);
-    background: linear-gradient(180deg, rgba(41,41,41,1) 20%, rgba(84,84,84,1) 68%);
+    background: linear-gradient(180deg, rgba(27, 27, 27, 1) 35%, rgba(84, 84, 84, 1) 68%);
 
     @include responsive("xlg") {
         width: calc((100% - 2rem) / 5);
@@ -164,10 +163,11 @@ export default {
 
         button {
             padding: .5rem 1rem;
-            background-color: rgb(86, 86, 86);
+            background-color: rgb(27, 27, 27);
             border: 1px solid $primary-color;
             margin: 2rem;
             align-self: flex-end;
+            border-radius: 5px;
 
             .streming {
                 text-decoration: none;
@@ -175,7 +175,7 @@ export default {
             }
 
             &:hover {
-                filter: brightness(150%);
+                filter: brightness(200%);
                 cursor: pointer;
             }
         }
@@ -199,7 +199,7 @@ export default {
         padding: 1rem;
 
         .cast {
-            color: orange;
+            color: $primary-color;
             margin-bottom: 1rem;
             display: block;
         }
