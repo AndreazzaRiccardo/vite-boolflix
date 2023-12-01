@@ -39,8 +39,8 @@ export default {
                 this.store.filterFilms = store.films;
             }
         },
-        getImg() {
-            return new URL(`../assets/img/user-ico.png`, import.meta.url).href;
+        getImg(img) {
+            return new URL(`../assets/img/${img}`, import.meta.url).href;
         },
         showMenu() {
             this.store.visibleMenuUser = !this.store.visibleMenuUser
@@ -63,7 +63,7 @@ export default {
 
 <template>
     <header>
-        <h1>BOOLFLIX</h1>
+        <img class="logo" :src="getImg('logo.png')" alt="">
         <div class="search-section" v-if="!store.login">
             <select v-model="store.filterValue" @change="filterForGenres" name="genres" id="genres">
                 <option :value="0" selected>Scegli un genere</option>
@@ -79,7 +79,7 @@ export default {
                 <p>BENTORNATO {{ store.username.toLocaleUpperCase() }}</p>
             </div>
             <div @click="showMenu" class="user-option">
-                <img :src="getImg()" alt="">
+                <img :src="getImg('user-ico.png')" alt="">
                 <div v-if="store.visibleMenuUser">
                     <ul>
                         <li @click="clickMenuOption(item)" v-for="item in menuArray">
@@ -101,7 +101,6 @@ header {
     background-color: rgb(41, 41, 41);
     @include flex (row, space-between, center, nowrap);
     height: 100px;
-    border-bottom: 1px solid $primary-color;
 
     @include responsive("lg") {
         height: 300px;
@@ -122,25 +121,18 @@ header {
             border: none;
             outline: none;
             font-weight: bold;
+            padding: 0 1rem;
         }
     }
 
     select {
         padding: .5rem 1rem;
+        border-radius: 5px;
     }
 
     .log {
         font-size: 1.5rem;
         color: $primary-color;
-    }
-
-    h1 {
-        font-size: 2rem;
-        color: $primary-color;
-
-        @include responsive("lg") {
-            font-size: 1.5rem;
-        }
     }
 
     .search-section {
@@ -190,8 +182,12 @@ header {
                 right: -4%;
                 top: 155%;
 
+                @include responsive("sm") {
+                    left: -250%;
+                }
+
                 li {
-                    background-color: gray;
+                    background-color: #414141;
                     padding: .5rem 1rem;
                     border-bottom: 1px solid $primary-color;
 
@@ -204,6 +200,10 @@ header {
                         line-height: 3rem;
                         color: white;
                         text-decoration: none;
+
+                        @include responsive("sm") {
+                            font-size: 1.5rem;
+                        }
                     }
                 }
             }

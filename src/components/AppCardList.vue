@@ -55,16 +55,7 @@ main {
     overflow: auto;
 
     &::-webkit-scrollbar {
-        width: 15px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #ccc;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $primary-color;
+        width: 1px;
     }
 }
 

@@ -1,3 +1,5 @@
+@use '../style/partials/mixins' as *;
+
 * {
     margin: 0;
     padding: 0;
@@ -5,5 +7,14 @@
 }
 
 body {
-    background-color: rgb(54, 54, 54);
+    background: rgb(41, 41, 41);
+    background: linear-gradient(180deg, rgba(41, 41, 41, 1) 35%, rgba(84, 84, 84, 1) 68%);
+
+    @include responsive("lg") {
+        background: linear-gradient(180deg, rgba(41, 41, 41, 1) 40%, rgba(84, 84, 84, 1) 68%);
+    }
+
+    @include responsive("sm") {
+        background: linear-gradient(180deg, rgba(41, 41, 41, 1) 50%, rgba(84, 84, 84, 1) 68%);
+    }
 }

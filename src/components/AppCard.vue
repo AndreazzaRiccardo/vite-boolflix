@@ -127,7 +127,8 @@ export default {
 .card {
     color: white;
     width: calc((100% - 1.5rem) / 4);
-    background-color: rgb(77, 76, 76);
+    background: rgb(41,41,41);
+    background: linear-gradient(180deg, rgba(41,41,41,1) 20%, rgba(84,84,84,1) 68%);
 
     @include responsive("xlg") {
         width: calc((100% - 2rem) / 5);
@@ -145,9 +146,10 @@ export default {
     .poster {
         width: 100%;
         aspect-ratio: .6;
+        object-fit: cover;
         transition: all 1s linear;
         display: block;
-        transform: rotateY(0deg);
+        filter: saturate(130%);
 
         &:hover {
             transform: rotateY(90deg);
@@ -156,7 +158,6 @@ export default {
     }
 
     .data {
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
