@@ -5,3 +5,23 @@
         flex-direction: $direction;
         flex-wrap: $wrap;
  }
+
+ @mixin responsive($screensize) {
+    @if $screensize == "sm" {
+        @media screen and (max-width: 480px) {
+            @content; // serve a dire, prendi ciò che ti verrà scritto all'interno 
+        }
+    } @else if $screensize == "md" {
+        @media screen and (max-width: 736px) {
+            @content;
+        }
+    } @else if $screensize == "lg" {
+        @media screen and (max-width: 1280px) {
+            @content;
+        }
+    } @else if $screensize == "xlg" {
+        @media screen and (max-width: 1690px) {
+            @content;
+        }
+    }
+}

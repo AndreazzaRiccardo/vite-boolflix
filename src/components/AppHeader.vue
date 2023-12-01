@@ -103,6 +103,16 @@ header {
     height: 100px;
     border-bottom: 1px solid $primary-color;
 
+    @include responsive("lg") {
+        height: 300px;
+    }
+
+    @include responsive("sm") {
+        @include flex (column, space-between, center, nowrap);
+        height: 400px;
+        text-align: center;
+    }
+
     .search-bar {
         padding: .5rem;
         background-color: white;
@@ -110,7 +120,6 @@ header {
 
         input {
             border: none;
-            margin-left: .5rem;
             outline: none;
             font-weight: bold;
         }
@@ -122,23 +131,30 @@ header {
 
     .log {
         font-size: 1.5rem;
-        margin-left: 1.5rem;
         color: $primary-color;
     }
 
     h1 {
         font-size: 2rem;
         color: $primary-color;
+
+        @include responsive("lg") {
+            font-size: 1.5rem;
+        }
     }
 
     .search-section {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        gap: 1rem;
+
+        @include responsive("lg") {
+            flex-direction: column;
+            gap: 1rem;
+        }
 
         .src-btn {
-            margin-right: 1rem;
-            margin-left: 2rem;
             padding: .5rem 1rem;
             background-color: white;
             border: none;
@@ -154,11 +170,14 @@ header {
         .user-option {
             width: 5%;
             position: relative;
-            margin-left: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 5;
+
+            @include responsive("lg") {
+                width: 20%;
+            }
 
             img {
                 width: 100%;

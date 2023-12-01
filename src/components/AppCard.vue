@@ -122,11 +122,20 @@ export default {
 
 <style scoped lang="scss">
 @use '../style/partials/variables' as *;
+@use '../style/partials/mixins' as *;
 
 .card {
     color: white;
     width: calc((100% - 1.5rem) / 4);
     background-color: rgb(77, 76, 76);
+
+    @include responsive("lg") {
+        width: calc((100% - 0.5rem) / 2);
+    }
+
+    @include responsive("sm") {
+        width: 100%;
+    }
 
     .poster {
         width: 100%;

@@ -86,7 +86,7 @@ main {
         margin: 2rem;
 
         &:hover {
-            filter:brightness(150%);
+            filter: brightness(150%);
             cursor: pointer;
         }
     }
@@ -118,6 +118,10 @@ main {
         color: white;
         font-size: 3rem;
         margin: 2rem;
+
+        @include responsive("lg") {
+            font-size: 1.5rem;
+        }
     }
 }
 </style>
