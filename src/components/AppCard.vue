@@ -41,6 +41,7 @@ export default {
                 this.visible = false;
             }, 100)
         },
+        
         vote(vote) {
             return Math.ceil(vote / 2);
         },
