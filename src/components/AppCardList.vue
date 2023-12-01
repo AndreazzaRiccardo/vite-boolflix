@@ -17,35 +17,55 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <div class="top-list">
-            <h2 class="search-message">{{ store.searchMessage }}</h2>
+    <main>
+        <div class="container">
+            <div class="top-list">
+                <h2 class="search-message">{{ store.searchMessage }}</h2>
+                <div>
+                    <button v-if="page > 1" @click="$emit('show-back')">BACK</button>
+                    <button @click="$emit('show-more')">NEXT</button>
+                </div>
+            </div>
+
             <div>
-                <button v-if="page > 1" @click="$emit('show-back')">BACK</button>
-                <button @click="$emit('show-more')">NEXT</button>
+                <h2 v-if="store.filterFilms.length > 0">FILMS</h2>
+                <div class="card-list">
+                    <AppCard v-for="(movie, i) in store.filterFilms" :key="i" :film="movie" :filterValue="store.filterValue"
+                        :api_key="store.apiKey" />
+                </div>
+                <hr v-show="store.filterSeries.length > 0">
+                <h2 v-if="store.filterSeries.length > 0">SERIES</h2>
+                <div class="card-list">
+                    <AppCard v-for="(serie, i) in store.filterSeries" :key="i" :film="serie"
+                        :filterValue="store.filterValue" :api_key="store.apiKey" />
+                </div>
             </div>
-        </div>
 
-        <div class="list">
-            <h2 v-if="store.filterFilms.length > 0">FILMS</h2>
-            <div class="card-list">
-                <AppCard v-for="(movie, i) in store.filterFilms" :key="i" :film="movie" :filterValue="store.filterValue"
-                    :api_key="store.apiKey" />
-            </div>
-            <hr v-show="store.filterSeries.length > 0">
-            <h2 v-if="store.filterSeries.length > 0">SERIES</h2>
-            <div class="card-list">
-                <AppCard v-for="(serie, i) in store.filterSeries" :key="i" :film="serie" :filterValue="store.filterValue"
-                    :api_key="store.apiKey" />
-            </div>
         </div>
-
-    </div>
+    </main>
 </template>
 
 <style scoped lang="scss">
 @use "../style/partials/mixins" as *;
 @use '../style/partials/variables' as *;
+
+main {
+    height: calc(100dvh - 100px);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #ccc;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $primary-color;
+    }
+}
 
 .container {
     width: 80%;
@@ -72,6 +92,7 @@ export default {
 
     hr {
         margin-top: 3rem;
+        border: 1px solid $primary-color;
     }
 
     .search-message {

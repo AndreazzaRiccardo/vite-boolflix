@@ -31,7 +31,7 @@ export default {
                     this.store.searchMessage = "LA RICERCA NON HA PRODOTTO RISULTATI"
                 }
             } else {
-                if(this.store.searchText == "") {
+                if (this.store.searchText == "") {
                     this.store.searchMessage = "I PIU'VISTI:"
                 } else {
                     this.store.searchMessage = `Risultati di ${this.store.searchText.trim()}:`.toLocaleUpperCase();
@@ -65,7 +65,7 @@ export default {
                     v-model="store.searchText">
             </div>
             <div class="log">
-                <p v-if="store.loading == false">BENTORNATO {{ store.username.toLocaleUpperCase() }}</p>
+                <p>BENTORNATO {{ store.username.toLocaleUpperCase() }}</p>
             </div>
             <div @click="showMenu" class="user-option">
                 <img :src="getImg()" alt="">
@@ -89,11 +89,6 @@ header {
     padding: 2rem 4rem;
     background-color: rgb(41, 41, 41);
     @include flex (row, space-between, center, nowrap);
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100px;
 
     .search-bar {

@@ -26,9 +26,9 @@ export default {
         },
         getImg() {
             if (this.film.poster_path == undefined) {
-                this.imgNotFound = true
+                this.imgNotFound = true;
             } else {
-                return `https://image.tmdb.org/t/p/w342${this.film.poster_path}`
+                return `https://image.tmdb.org/t/p/w342${this.film.poster_path}`;
             }
         },
         showData() {
@@ -111,6 +111,7 @@ export default {
 
 <style scoped lang="scss">
 @use '../style/partials/variables' as *;
+
 .card {
     color: white;
     width: calc((100% - 1.5rem) / 4);
@@ -188,4 +189,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

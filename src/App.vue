@@ -17,6 +17,7 @@ export default {
     this.getAllGenres();
     this.mostViewed();
     this.setLocalKey();
+    this.store.loading = false;
   },
   methods: {
     apiCall(type) {
@@ -42,8 +43,8 @@ export default {
         })
         .finally(() => {
           this.store.loading = false;
-          this.store.filterFilms = this.store.films
-          this.store.filterSeries = this.store.series
+          this.store.filterFilms = this.store.films;
+          this.store.filterSeries = this.store.series;
         });
     },
     searchWhitButton() {
@@ -73,7 +74,7 @@ export default {
           }
         })
         .then((resp) => {
-          this.store.seriesGenres = resp.data.genres
+          this.store.seriesGenres = resp.data.genres;
         }).finally(() => {
           axios
             .get(this.store.baseUrl + "genre/movie/list", {
@@ -83,15 +84,15 @@ export default {
               }
             })
             .then((resp) => {
-              this.store.filmsGenres = resp.data.genres
+              this.store.filmsGenres = resp.data.genres;
             }).finally(() => {
-              this.store.allGenres = [...this.store.seriesGenres, ...this.store.filmsGenres]
+              this.store.allGenres = [...this.store.seriesGenres, ...this.store.filmsGenres];
             })
         })
     },
     mostViewed() {
       if (this.store.searchText == "") {
-        this.store.searchMessage = "I PIU' VISTI:"
+        this.store.searchMessage = "I PIU' VISTI:";
         this.store.loading = true;
         axios
           .get(this.store.baseUrl + "tv/top_rated", {
@@ -107,7 +108,7 @@ export default {
             this.error = true;
           })
           .finally(() => {
-            this.store.filterSeries = this.store.series
+            this.store.filterSeries = this.store.series;
 
             axios
               .get(this.store.baseUrl + "movie/top_rated", {
@@ -124,28 +125,28 @@ export default {
               })
               .finally(() => {
                 this.store.loading = false;
-                this.store.filterFilms = this.store.films
+                this.store.filterFilms = this.store.films;
               });
           });
       }
     },
     setLocalKey() {
       if (localStorage.getItem("Username") != undefined) {
-        this.store.username = localStorage.getItem("Username")
-        this.store.login = false
+        this.store.username = localStorage.getItem("Username");
+        this.store.login = false;
       }
     },
     showMore() {
       this.page++;
       if (this.store.searchText == "") {
-        this.mostViewed()
+        this.mostViewed();
       } else {
         this.apiCall("tv");
         this.apiCall("movie");
       }
       setTimeout(() => {
         if (this.store.filterFilms.length == 0 && this.store.filterSeries.length == 0) {
-          this.store.searchMessage = "Non ci sono altre pagine disponibili"
+          this.store.searchMessage = "Non ci sono altre pagine disponibili";
         }
       }, 2000);
     },
@@ -153,12 +154,12 @@ export default {
       if (this.page > 1) {
         this.page--;
         if (this.store.searchText == "") {
-          this.store.searchMessage = "I PIU'VISTI:"
+          this.store.searchMessage = "I PIU'VISTI:";
         } else {
           this.store.searchMessage = `Risultati di ${this.store.searchText.trim()}:`.toLocaleUpperCase();
         }
         if (this.store.searchText == "") {
-          this.mostViewed()
+          this.mostViewed();
         } else {
           this.apiCall("tv");
           this.apiCall("movie");
@@ -171,15 +172,22 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search-whit-button="searchWhitButton" @search-whit-input="searchWhitInput" />
-  <AppLogin v-if="store.login" />
-  <div v-else>
-    <AppLoader v-if="store.loading" />
-    <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" />
+  <div class="wrapper">
+    <AppHeader @search-whit-button="searchWhitButton" @search-whit-input="searchWhitInput" />
+    <AppLoader v-if="store.login && store.loading" />
+    <AppLogin v-if="store.login" />
+    <div v-else>
+      <AppLoader v-if="store.loading" />
+      <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 @use "./style/general.scss";
 @use "@fortawesome/fontawesome-free/css/all.css";
+
+.wrapper {
+  height: 100dvh;
+}
 </style>

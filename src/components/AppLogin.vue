@@ -9,13 +9,14 @@ export default {
     methods: {
         login() {
             if (this.store.username !== "") {
-                this.store.loadingMessage = "ACCESSO IN CORSO"
-                this.store.loading = true
-                this.store.login = false
+                this.store.loadingMessage = "ACCESSO IN CORSO";
+                this.store.loading = true;
+
                 localStorage.setItem("Username", this.store.username)
                 setTimeout(() => {
-                    this.store.loading = false
-                    this.store.loadingMessage = "RICERCA IN CORSO"
+                    this.store.loading = false;
+                    this.store.login = false;
+                    this.store.loadingMessage = "RICERCA IN CORSO";
                 }, 3000);
             }
         }

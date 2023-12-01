@@ -21,7 +21,6 @@ export default {
 </template>
 
 <style scoped lang="scss">
-
 .loader {
     display: flex;
     flex-direction: column;
