@@ -41,7 +41,6 @@ export default {
                 this.visible = false;
             }, 100)
         },
-        
         vote(vote) {
             return Math.ceil(vote / 2);
         },
@@ -70,9 +69,9 @@ export default {
         stremThis() {
             event.preventDefault();
             if (this.film.title === undefined) {
-                location.assign(`https://www.google.com/search?q=streming+${this.film.name}`);
+                window.open(`https://www.google.com/search?q=streming+${this.film.name}`);
             } else {
-                location.assign(`https://www.google.com/search?q=streming+${this.film.title}`);
+                window.open(`https://www.google.com/search?q=streming+${this.film.title}`);
             }
         }
     },
