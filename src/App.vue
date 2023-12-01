@@ -170,6 +170,9 @@ export default {
           this.apiCall("movie");
         }
       }
+    },
+    closeMenuUser() {
+      this.store.visibleMenuUser = false;
     }
   },
   components: { AppCardList, AppHeader, AppLoader, AppLogin },
@@ -181,7 +184,7 @@ export default {
     <AppHeader @search-whit-button="searchWhitButton" @search-whit-input="searchWhitInput" />
     <AppLoader v-if="store.login && store.loading" />
     <AppLogin v-if="store.login" />
-    <div v-else>
+    <div v-else  @click="closeMenuUser">
       <AppLoader v-if="store.loading" />
       <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" :showNextBtn="showNextBtn" />
     </div>

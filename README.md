@@ -8,3 +8,4 @@ Tramite l'input di ricerca potremo trovare ogni elemento disponibile nel catalog
 Potrò anche scorrere le pagine, nel caso siano disponibili, per visualizzare più risultati.
 Ogni elemento visualizzato sarà composto dalla propria locandina, che al passaggio del mouse rivelerà titolo, lingua, voto, e trama.
 Potrò richiedere anche di visualizzare il cast cliccando sull'apposito bottone.
+Tramite il menù a tendina nell'icona utente, potrò anche effettuare il logout.

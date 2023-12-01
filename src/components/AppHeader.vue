@@ -4,7 +4,6 @@ export default {
     data() {
         return {
             store,
-            visibleMenuUser: false,
             menuArray: ["HOME", "PROFILO", "CERCA", "IMPOSTAZIONI", "LOGOUT"]
         }
     },
@@ -44,12 +43,18 @@ export default {
             return new URL(`../assets/img/user-ico.png`, import.meta.url).href;
         },
         showMenu() {
-            this.visibleMenuUser = !this.visibleMenuUser
+            this.store.visibleMenuUser = !this.store.visibleMenuUser
         },
         clickMenuOption(option) {
-            if(option === "LOGOUT") {
+            event.preventDefault()
+            if (option === "LOGOUT") {
+                this.store.loadingMessage = "LOGOUT IN CORSO";
+                this.store.loading = true;
                 localStorage.removeItem("Username");
-                store.login = true;
+                setTimeout(() => {
+                    this.store.loading = false;
+                    this.store.login = true;
+                }, 3000);
             }
         }
     }
@@ -75,7 +80,7 @@ export default {
             </div>
             <div @click="showMenu" class="user-option">
                 <img :src="getImg()" alt="">
-                <div v-if="visibleMenuUser">
+                <div v-if="store.visibleMenuUser">
                     <ul>
                         <li @click="clickMenuOption(item)" v-for="item in menuArray">
                             <a href="">{{ item }}</a>

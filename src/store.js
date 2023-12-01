@@ -16,6 +16,7 @@ export const store = reactive({
     searchMessage: "I PIU' VISTI:",
     username: "",
     login: true,
-    loadingMessage: ""
+    loadingMessage: "",
+    visibleMenuUser: false
 });
 
