@@ -129,6 +129,10 @@ export default {
     width: calc((100% - 1.5rem) / 4);
     background-color: rgb(77, 76, 76);
 
+    @include responsive("xlg") {
+        width: calc((100% - 2rem) / 5);
+    }
+
     @include responsive("lg") {
         width: calc((100% - 0.5rem) / 2);
     }
@@ -136,6 +140,7 @@ export default {
     @include responsive("sm") {
         width: 100%;
     }
+
 
     .poster {
         width: 100%;
