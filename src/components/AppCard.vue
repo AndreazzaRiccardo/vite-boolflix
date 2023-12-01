@@ -19,7 +19,7 @@ export default {
     methods: {
         getImgFlagUrl(lang) {
             if (this.flagArray.includes(lang)) {
-                return new URL(`../assets/img/flag-${lang}.png`, import.meta.url).href;
+                return new URL(`../assets/img/flag-${lang.trim()}.png`, import.meta.url).href;
             } else {
                 this.languageNotFound = true;
             }
@@ -109,10 +109,11 @@ export default {
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
+@use '../style/partials/variables' as *;
 .card {
     color: white;
-    width: calc(100% / 4);
+    width: calc((100% - 1.5rem) / 4);
     background-color: rgb(77, 76, 76);
 
     .poster {
@@ -129,6 +130,19 @@ export default {
     }
 
     .data {
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #ccc;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $primary-color;
+        }
+
         overflow: auto;
         width: 100%;
         aspect-ratio: .6;
@@ -143,8 +157,8 @@ export default {
         h3 {
             text-align: center;
             margin-bottom: 1rem;
-            color: rgb(224, 67, 67);
-            border-bottom: 2px solid rgb(156, 73, 73);
+            color: $primary-color;
+            border-bottom: 2px solid $primary-color;
         }
 
         p {
@@ -174,5 +188,4 @@ export default {
             }
         }
     }
-}
-</style>
+}</style>

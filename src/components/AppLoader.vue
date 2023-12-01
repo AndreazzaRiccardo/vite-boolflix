@@ -1,12 +1,17 @@
 <script>
+import { store } from '../store.js';
 export default {
-
+    data() {
+        return {
+            store
+        }
+    }
 }
 </script>
 
 <template>
     <div class="loader">
-        <h2>STO CERCANDO</h2>
+        <h2>{{ store.loadingMessage }}</h2>
         <div class="col-xs-12">
             <div class="well">
                 <i class="ex-10-icon fas fa-circle-notch"></i>
@@ -15,7 +20,7 @@ export default {
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .loader {
     display: flex;

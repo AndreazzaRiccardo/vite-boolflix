@@ -13,6 +13,9 @@ export const store = reactive({
     filterValue: 0,
     filterFilms: [],
     filterSeries: [],
-    searchErrorMessage: "INIZIA UNA RICERCA"
+    searchMessage: "I PIU' VISTI:",
+    username: "",
+    login: true,
+    loadingMessage: ""
 });
 

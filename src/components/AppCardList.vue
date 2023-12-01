@@ -5,40 +5,79 @@ export default {
     data() {
         return {
             store,
-            filterFilmsArray: [],
-            filterSeriesArray: [],
         }
     },
     components: {
         AppCard
     },
+    props: {
+        page: Number
+    }
 }
 </script>
 
 <template>
     <div class="container">
-        <h2 v-if="store.filterFilms.length == 0 && store.filterSeries.length == 0">{{ store.searchErrorMessage }}</h2>
-        <div v-else>
+        <div class="top-list">
+            <h2 class="search-message">{{ store.searchMessage }}</h2>
+            <div>
+                <button v-if="page > 1" @click="$emit('show-back')">BACK</button>
+                <button @click="$emit('show-more')">NEXT</button>
+            </div>
+        </div>
+
+        <div class="list">
             <h2 v-if="store.filterFilms.length > 0">FILMS</h2>
             <div class="card-list">
                 <AppCard v-for="(movie, i) in store.filterFilms" :key="i" :film="movie" :filterValue="store.filterValue"
                     :api_key="store.apiKey" />
             </div>
+            <hr v-show="store.filterSeries.length > 0">
             <h2 v-if="store.filterSeries.length > 0">SERIES</h2>
             <div class="card-list">
                 <AppCard v-for="(serie, i) in store.filterSeries" :key="i" :film="serie" :filterValue="store.filterValue"
                     :api_key="store.apiKey" />
             </div>
         </div>
+
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "../style/partials/mixins" as *;
+@use '../style/partials/variables' as *;
 
 .container {
     width: 80%;
     margin: 1rem auto;
+
+    .top-list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    button {
+        padding: .5rem 1rem;
+        background-color: rgb(86, 86, 86);
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        margin: 2rem;
+
+        &:hover {
+            opacity: 50%;
+            cursor: pointer;
+        }
+    }
+
+    hr {
+        margin-top: 3rem;
+    }
+
+    .search-message {
+        color: $primary-color;
+        text-align: center;
+    }
 
     .error {
         color: white;
@@ -48,7 +87,8 @@ export default {
     }
 
     .card-list {
-        @include flex (row, flex-start, center, wrap)
+        @include flex (row, flex-start, center, wrap);
+        gap: .5rem;
     }
 
     h2 {

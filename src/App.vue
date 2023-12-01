@@ -4,22 +4,27 @@ import { store } from './store.js';
 import AppCardList from './components/AppCardList.vue';
 import AppHeader from './components/AppHeader.vue';
 import AppLoader from './components/AppLoader.vue';
+import AppLogin from './components/AppLogin.vue';
 export default {
   data() {
     return {
       store,
-      error: false
+      error: false,
+      page: 1
     };
   },
   created() {
     this.getAllGenres();
+    this.mostViewed();
+    this.setLocalKey();
   },
   methods: {
     apiCall(type) {
       this.store.loading = true;
       const params = {
         query: this.store.searchText,
-        api_key: this.store.apiKey
+        api_key: this.store.apiKey,
+        page: this.page
       };
       axios
         .get(this.store.baseUrl + "search/" + type, {
@@ -41,18 +46,30 @@ export default {
           this.store.filterSeries = this.store.series
         });
     },
-    searchMovieAndSeries() {
+    searchWhitButton() {
+      this.page = 1;
       if (this.store.searchText != "") {
+        this.store.searchMessage = `Risultati di ${this.store.searchText}:`.toLocaleUpperCase();
         this.apiCall("tv");
         this.apiCall("movie");
-        this.store.searchText = "";
+      }
+    },
+    searchWhitInput() {
+      this.page = 1;
+      if (this.store.searchText.length % 4 === 0 && this.store.searchText.trim() != "") {
+        this.store.searchMessage = `Risultati di ${this.store.searchText.trim()}:`.toLocaleUpperCase();
+        this.apiCall("tv");
+        this.apiCall("movie");
+      } else {
+        this.mostViewed();
       }
     },
     getAllGenres() {
       axios
         .get(this.store.baseUrl + "genre/tv/list", {
           params: {
-            api_key: this.store.apiKey
+            api_key: this.store.apiKey,
+            page: this.page
           }
         })
         .then((resp) => {
@@ -61,7 +78,8 @@ export default {
           axios
             .get(this.store.baseUrl + "genre/movie/list", {
               params: {
-                api_key: this.store.apiKey
+                api_key: this.store.apiKey,
+                page: this.page
               }
             })
             .then((resp) => {
@@ -71,15 +89,94 @@ export default {
             })
         })
     },
+    mostViewed() {
+      if (this.store.searchText == "") {
+        this.store.searchMessage = "I PIU' VISTI:"
+        this.store.loading = true;
+        axios
+          .get(this.store.baseUrl + "tv/top_rated", {
+            params: {
+              api_key: this.store.apiKey,
+              page: this.page
+            }
+          })
+          .then((resp) => {
+            this.store.series = resp.data.results;
+          })
+          .catch((err) => {
+            this.error = true;
+          })
+          .finally(() => {
+            this.store.filterSeries = this.store.series
+
+            axios
+              .get(this.store.baseUrl + "movie/top_rated", {
+                params: {
+                  api_key: this.store.apiKey,
+                  page: this.page
+                }
+              })
+              .then((resp) => {
+                this.store.films = resp.data.results;
+              })
+              .catch((err) => {
+                this.error = true;
+              })
+              .finally(() => {
+                this.store.loading = false;
+                this.store.filterFilms = this.store.films
+              });
+          });
+      }
+    },
+    setLocalKey() {
+      if (localStorage.getItem("Username") != undefined) {
+        this.store.username = localStorage.getItem("Username")
+        this.store.login = false
+      }
+    },
+    showMore() {
+      this.page++;
+      if (this.store.searchText == "") {
+        this.mostViewed()
+      } else {
+        this.apiCall("tv");
+        this.apiCall("movie");
+      }
+      setTimeout(() => {
+        if (this.store.filterFilms.length == 0 && this.store.filterSeries.length == 0) {
+          this.store.searchMessage = "Non ci sono altre pagine disponibili"
+        }
+      }, 2000);
+    },
+    showBack() {
+      if (this.page > 1) {
+        this.page--;
+        if (this.store.searchText == "") {
+          this.store.searchMessage = "I PIU'VISTI:"
+        } else {
+          this.store.searchMessage = `Risultati di ${this.store.searchText.trim()}:`.toLocaleUpperCase();
+        }
+        if (this.store.searchText == "") {
+          this.mostViewed()
+        } else {
+          this.apiCall("tv");
+          this.apiCall("movie");
+        }
+      }
+    }
   },
-  components: { AppCardList, AppHeader, AppLoader }
+  components: { AppCardList, AppHeader, AppLoader, AppLogin },
 }
 </script>
 
 <template>
-  <AppHeader @search="searchMovieAndSeries" />
-  <AppLoader v-if="store.loading" />
-  <AppCardList v-else />
+  <AppHeader @search-whit-button="searchWhitButton" @search-whit-input="searchWhitInput" />
+  <AppLogin v-if="store.login" />
+  <div v-else>
+    <AppLoader v-if="store.loading" />
+    <AppCardList v-else @show-more="showMore" @show-back="showBack" :page="page" />
+  </div>
 </template>
 
 <style lang="scss">
