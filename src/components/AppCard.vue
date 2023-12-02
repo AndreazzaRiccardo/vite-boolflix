@@ -131,6 +131,7 @@ export default {
 
             </div>
             <button @click="stremThis">
+                <i class="fa-solid fa-play"></i>
                 <a class="streaming" href="">GUARDA</a>
             </button>
         </div>
@@ -180,16 +181,20 @@ export default {
         justify-content: space-between;
 
         button {
-            padding: .5rem 1rem;
-            background-color: rgb(27, 27, 27);
-            border: 1px solid $primary-color;
-            margin: 2rem;
+            padding: .8rem 1.5rem;
+            background-color: $primary-color;
             align-self: flex-end;
-            border-radius: 5px;
+            border-radius: 20px;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            color: white;
 
             .streaming {
                 text-decoration: none;
-                color: $primary-color;
+                color: white;
+                font-weight: bolder;
             }
 
             &:hover {

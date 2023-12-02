@@ -25,9 +25,9 @@ export default {
         <div class="container">
             <div class="top-list">
                 <h2 class="search-message">{{ store.searchMessage }}</h2>
-                <div>
-                    <button v-if="page > 1" @click="$emit('show-back')">BACK</button>
-                    <button v-if="showNextBtn" @click="$emit('show-more')">NEXT</button>
+                <div class="btn-page">
+                    <button v-if="page > 1" @click="$emit('show-back')"><i class="fa-solid fa-angles-left"></i>BACK</button>
+                    <button v-if="showNextBtn" @click="$emit('show-more')">NEXT<i class="fa-solid fa-angles-right"></i></button>
                 </div>
             </div>
 
@@ -90,15 +90,21 @@ main {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
+        .btn-page {
+            display: flex;
+        }
     }
 
     button {
         padding: .5rem 1rem;
-        background-color: rgb(86, 86, 86);
+        background-color: rgb(57, 57, 57);
         color: $primary-color;
         border: 1px solid $primary-color;
-        margin: 2rem;
+        margin: .5rem;
         border-radius: 5px;
+        display: flex;
+        gap: .5rem;
 
         @include responsive("sm") {
             margin: .5rem;
