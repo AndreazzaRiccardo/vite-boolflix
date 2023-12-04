@@ -27,7 +27,8 @@ export default {
                 <h2 class="search-message">{{ store.searchMessage }}</h2>
                 <div class="btn-page">
                     <button v-if="page > 1" @click="$emit('show-back')"><i class="fa-solid fa-angles-left"></i>BACK</button>
-                    <button v-if="showNextBtn" @click="$emit('show-more')">NEXT<i class="fa-solid fa-angles-right"></i></button>
+                    <button v-if="showNextBtn" @click="$emit('show-more')">NEXT<i
+                            class="fa-solid fa-angles-right"></i></button>
                 </div>
             </div>
 
@@ -90,9 +91,13 @@ main {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
+
         .btn-page {
             display: flex;
+
+            @include responsive("sm") {
+                flex-direction: column;
+            }
         }
     }
 

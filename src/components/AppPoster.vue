@@ -72,7 +72,10 @@ export default {
         left: 3%;
         font-size: 2rem;
         color: white;
-        width: 50%;
+
+        @include responsive("xlg") {
+            width: 60%;
+        }
 
         .data-poster {
             -webkit-text-stroke-width: .5px;
