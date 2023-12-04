@@ -64,7 +64,6 @@ export default {
         width: 100%;
         height: 800px;
         object-fit: cover;
-
     }
 
     .data-container {

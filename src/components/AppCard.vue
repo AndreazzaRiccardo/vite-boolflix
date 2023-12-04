@@ -147,6 +147,8 @@ export default {
     color: white;
     width: calc((100% - 1.5rem) / 4);
     background: linear-gradient(180deg, rgba(27, 27, 27, 1) 35%, rgba(84, 84, 84, 1) 68%);
+    border: .5px solid #272727;
+    border-radius: 20px;
 
     @include responsive("xlg") {
         width: calc((100% - 2.5rem) / 6);
@@ -168,6 +170,7 @@ export default {
         transition: all 1s linear;
         display: block;
         filter: saturate(130%);
+        border-radius: 20px;
 
         &:hover {
             transform: rotateY(90deg);

@@ -82,7 +82,7 @@ export default {
                     v-model="store.searchText">
             </div>
             <div class="log">
-                <p>BENTORNATO {{ store.username.toLocaleUpperCase() }}</p>
+                <p>CIAO {{ store.username.toLocaleUpperCase() }}</p>
             </div>
             <div @click="showMenu" class="user-option">
                 <img :src="getImg('user-ico.png')" alt="">
