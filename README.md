@@ -1,19 +1,21 @@
 ### BOOFLIX
 
-**DESCRIZIONE:**
+**DESCRIPTION:**
 
-Applicazione che si collega all'_api_ di _TMDB_.
-<br>
-Una volta effettuata una simulazione di login, l'app si avvierà mostrando i Top Rated sia della categoria films che serie.
-<br>
-Tramite l'input di ricerca potremo trovare ogni elemento disponibile nel catalogo e filtrare il tutto anche per genere.
-<br>
-Potrò anche scorrere le pagine, nel caso siano disponibili, per visualizzare più risultati.
-<br>
-Ogni elemento visualizzato sarà composto dalla propria locandina, che al passaggio del mouse rivelerà titolo, lingua, voto, e trama.
-<br>
-Potrò richiedere anche di visualizzare il cast cliccando sull'apposito bottone.
-<br>
-Con il bottone GUARDA mi verrà aperta una nuova finestra con una ricerca Google su i siti streaming per il titolo selezionato.
-<br>
-Tramite il menù a tendina nell'icona utente, potrò anche effettuare il logout.
+Application linking to the _TMDB_api_ .
+
+Once you have made a simulation of login, the app will start showing the Top Rated both of the category films that series.
+
+Through the search input we can find every item available in the catalog and filter everything by genre.
+
+I can also scroll through the pages, if they are available, to see more results.
+
+Each element displayed will be composed of its own poster, which will reveal title, language, rating, and plot.
+
+I can also request to view the cast by clicking on the appropriate button.
+
+With the WATCH button I will be opened a new window with a Google search on the streaming sites for the selected title.
+
+Through the dropdown menu in the user icon, I can also log out.
+
+![Screenshot 2024-02-08 181018](https://github.com/AndreazzaRiccardo/vite-boolflix/assets/136316597/bf5ecf22-031c-4ca6-b453-3a73770b799c)
